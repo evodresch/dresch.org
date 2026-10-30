@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Evandro Dresch</title>
+<meta name="description" content="Evandro Dresch: energy risk analyst and fingerstyle guitarist in Freiburg.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎸</text></svg>">
+<style>
+  :root {
+    --bg: #E9ECE4;
+    --ink: #1E2722;
+    --muted: #56615A;
+    --steel: #8A9396;
+    --bronze: #9A7440;
+    --focus: #2F5D8A;
+    color-scheme: light;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #18201C;
+      --ink: #E3E6DC;
+      --muted: #A3AC9F;
+      --steel: #9AA3A6;
+      --bronze: #C49A5E;
+      --focus: #8FB8E0;
+      color-scheme: dark;
+    }
+  }
+  *, *::before, *::after { box-sizing: inherit; }
+  html, body { height: 100%; margin: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  main {
+    max-width: 38rem;
+    margin: 0 auto;
+    padding: clamp(3rem, 14vh, 9rem) 1.5rem 4rem;
+  }
+  h1 {
+    font-family: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", Palatino, Georgia, serif;
+    font-weight: 400;
+    font-size: clamp(2.6rem, 9vw, 4.4rem);
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin: 0 0 1.25rem;
+  }
+  .intro {
+    color: var(--muted);
+    max-width: 34ch;
+    margin: 0 0 3rem;
+  }
+
+  /* Six strings, thin to thick. The top two are plain steel, the rest wound bronze. */
+  .fretboard ul { list-style: none; margin: 0; padding: 0; }
+  .string {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    height: 3rem;
+  }
+  .string svg {
+    flex: 1;
+    height: 24px;
+    overflow: visible;
+  }
+  .string path {
+    fill: none;
+    stroke-width: var(--gauge);
+    vector-effect: non-scaling-stroke;
+  }
+  .steel path  { stroke: var(--steel); }
+  .bronze path { stroke: var(--bronze); }
+
+  .string a {
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.25em;
+    white-space: nowrap;
+  }
+  .string a:hover { text-decoration-thickness: 2px; }
+  .string a:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
+</style>
+</head>
+<body>
+<main>
+  <h1>Evandro Dresch</h1>
+  <p class="intro">I build risk models for energy markets and play instrumental fingerstyle guitar. I live in Freiburg, Germany.</p>
+
+  <div class="fretboard">
+    <ul aria-label="Contact and links">
+      <li class="string steel" style="--gauge:1px">
+        <a href="mailto:evo@dresch.org">evo@dresch.org</a>
+        <svg viewBox="0 0 100 24" preserveAspectRatio="none" aria-hidden="true"><path d="M0 12 Q50 12 100 12"/></svg>
+      </li>
+      <li class="string steel" style="--gauge:1.3px">
+        <a href="https://evandrodresch.com">Guitar music</a>
+        <svg viewBox="0 0 100 24" preserveAspectRatio="none" aria-hidden="true"><path d="M0 12 Q50 12 100 12"/></svg>
+      </li>
+      <!-- Replace each PASTE-… part with your real profile link before publishing. -->
+      <li class="string bronze" style="--gauge:1.6px">
+        <a href="https://open.spotify.com/artist/PASTE-ARTIST-ID" rel="me">Spotify</a>
+        <svg viewBox="0 0 100 24" preserveAspectRatio="none" aria-hidden="true"><path d="M0 12 Q50 12 100 12"/></svg>
+      </li>
+      <li class="string bronze" style="--gauge:2px">
+        <a href="https://PASTE-NAME.bandcamp.com" rel="me">Bandcamp</a>
+        <svg viewBox="0 0 100 24" preserveAspectRatio="none" aria-hidden="true"><path d="M0 12 Q50 12 100 12"/></svg>
+      </li>
+      <li class="string bronze" style="--gauge:2.5px">
+        <a href="https://www.linkedin.com/in/PASTE-HANDLE" rel="me">LinkedIn</a>
+        <svg viewBox="0 0 100 24" preserveAspectRatio="none" aria-hidden="true"><path d="M0 12 Q50 12 100 12"/></svg>
+      </li>
+      <li class="string bronze" style="--gauge:3px">
+        <a href="https://github.com/PASTE-USERNAME" rel="me">GitHub</a>
+        <svg viewBox="0 0 100 24" preserveAspectRatio="none" aria-hidden="true"><path d="M0 12 Q50 12 100 12"/></svg>
+      </li>
+    </ul>
+  </div>
+</main>
+
+<script>
+  // Pluck a string when the pointer crosses it or its link gets keyboard focus.
+  // A damped sine moves the curve's control point; reduced-motion users see still strings.
+  (function () {
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var REST = 'M0 12 Q50 12 100 12';
+
+    document.querySelectorAll('.string').forEach(function (row) {
+      var path = row.querySelector('path');
+      var frame = null;
+
+      function pluck() {
+        if (reduce.matches) return;
+        cancelAnimationFrame(frame);
+        var start = performance.now();
+        function step(now) {
+          var t = (now - start) / 1000;
+          var offset = 14 * Math.exp(-t * 4) * Math.sin(t * 2 * Math.PI * 9);
+          path.setAttribute('d', 'M0 12 Q50 ' + (12 + offset).toFixed(2) + ' 100 12');
+          if (t < 1.2) {
+            frame = requestAnimationFrame(step);
+          } else {
+            path.setAttribute('d', REST);
+          }
+        }
+        frame = requestAnimationFrame(step);
+      }
+
+      row.addEventListener('pointerenter', pluck);
+      var link = row.querySelector('a');
+      if (link) link.addEventListener('focus', pluck);
+    });
+  })();
+</script>
+</body>
+</html>
